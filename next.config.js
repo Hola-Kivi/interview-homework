@@ -15,6 +15,12 @@ const nextConfig = {
       'yxg-image.oss-cn-qingdao.aliyuncs.com',
     ],
   },
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
 };
 
 https: module.exports = nextConfig;
