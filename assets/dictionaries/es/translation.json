@@ -1,0 +1,20 @@
+{
+  "registerContent": {
+    "header": "创建账号",
+    "linkText": "已有账号？",
+    "subheader": "仅需几步就可完成",
+    "buttonText": "注册"
+  },
+  "loginContent": {
+    "header": "欢迎!",
+    "linkText": "还没有账号吗？",
+    "subheader": "请输入密码后登陆账户",
+    "buttonText": "登入"
+  },
+  "inputInfo": {
+    "firstName": "姓",
+    "lastName": "名",
+    "email": "邮箱",
+    "password": "密码"
+  }
+}

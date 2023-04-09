@@ -1,0 +1,199 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-gray: #8c97b7;
+  --color-blue: #1c38f1;
+  --color-green: #1fcdb0;
+  --input-height: 3rem;
+  --transition-duration: 0.3s;
+  --transition-easing: cubic-bezier(0.5, 0, 0.5, 1);
+  --animation-duration: 0.8s;
+}
+
+img,
+picture,
+svg {
+  max-width: 100%;
+  display: block;
+}
+.btn {
+  background: linear-gradient(
+    92.23deg,
+    #ff56f6 5.43%,
+    #b936ee 35.63%,
+    #3bace2 100%,
+    #406aff 117.04%
+  );
+  box-shadow: 0px 4.42184px 107.23px rgba(255, 86, 246, 0.51);
+}
+
+.btn:hover {
+  background: linear-gradient(
+    92.23deg,
+    #406aff 21.43%,
+    #3bace2 50.63%,
+    #b936ee 100%,
+    #ff56f6 117.04%
+  );
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: smooth;
+  }
+
+  *,
+  *::before,
+  *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+@layer base {
+  body {
+    @apply font-sans leading-normal;
+    text-rendering: optimizeSpeed;
+  }
+  .btn {
+    @apply rounded-lg text-white font-medium;
+  }
+  .btn-xs {
+    @apply h-[36px] px-2 text-sm;
+  }
+  .btn-sm {
+    @apply h-[48px] px-4 text-sm;
+  }
+  .btn-lg {
+    @apply h-[56px] px-8 text-lg;
+  }
+  .btn-link {
+    @apply text-base;
+  }
+  .text-gradient {
+    @apply bg-gradient-to-r text-transparent bg-clip-text from-[#42A6E3] to-[#FF56F6] font-bold  hover:from-[#FF56F6] hover:to-[#42A6E3];
+  }
+}
+.rainbow-mesh {
+  background-color: hsla(0, 100%, 50%, 1);
+  background-image: radial-gradient(
+      at 40% 20%,
+      hsla(28, 100%, 74%, 1) 0px,
+      transparent 50%
+    ),
+    radial-gradient(at 80% 0%, hsla(189, 100%, 56%, 1) 0px, transparent 50%),
+    radial-gradient(at 0% 50%, hsla(355, 100%, 93%, 1) 0px, transparent 50%),
+    radial-gradient(at 80% 50%, hsla(340, 100%, 76%, 1) 0px, transparent 50%),
+    radial-gradient(at 0% 100%, hsla(22, 100%, 77%, 1) 0px, transparent 50%),
+    radial-gradient(at 80% 100%, hsla(242, 100%, 70%, 1) 0px, transparent 50%),
+    radial-gradient(at 0% 0%, hsla(343, 100%, 76%, 1) 0px, transparent 50%);
+}
+.candy-mesh {
+  background-color: #ff99ee;
+  background-image: radial-gradient(
+      at 99% 6%,
+      hsla(195, 69%, 67%, 1) 0px,
+      transparent 50%
+    ),
+    radial-gradient(at 55% 88%, hsla(189, 74%, 69%, 1) 0px, transparent 50%),
+    radial-gradient(at 53% 27%, hsla(271, 78%, 63%, 1) 0px, transparent 50%),
+    radial-gradient(at 89% 89%, hsla(317, 89%, 70%, 1) 0px, transparent 50%),
+    radial-gradient(at 35% 44%, hsla(337, 92%, 61%, 1) 0px, transparent 50%);
+}
+.glass {
+  backdrop-filter: blur(16px) saturate(180%);
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+.headings {
+  animation: headings 4s both;
+  text-align: center;
+}
+.headings-title {
+  animation: first-heading 4s both;
+}
+.headings-text {
+  animation: second-heading 4s both;
+}
+
+.marquee-overlay {
+  position: absolute;
+  top: 0;
+  height: 100%;
+}
+.marquee-overlay-left {
+  left: 0;
+}
+.marquee-overlay-right {
+  right: 0;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+@keyframes first-heading {
+  from {
+    clip-path: polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%);
+  }
+  50%,
+  to {
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+  }
+}
+@keyframes second-heading {
+  from,
+  50% {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes headings {
+  from,
+  50% {
+    transform: translateY(50%) scale(1.5);
+  }
+  to {
+    transform: none;
+  }
+}
+
+.marquee {
+  animation: marquee 25s linear infinite;
+}
+.marquee2 {
+  animation: marquee2 25s linear infinite;
+}
+/* prettier-ignore */
+.p-marquee:hover div {
+  animation-play-state: paused;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+@keyframes marquee2 {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}

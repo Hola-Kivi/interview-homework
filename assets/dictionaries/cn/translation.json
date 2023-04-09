@@ -1,0 +1,63 @@
+{
+  "loginContent": {
+    "header": "欢迎!",
+    "linkText": "没有账户？",
+    "subheader": "请输入密码后登陆",
+    "buttonText": "登入"
+  },
+  "registerContent": {
+    "header": "创建账号",
+    "linkText": "已有账号？",
+    "subheader": "仅需几步就可完成",
+    "buttonText": "注册"
+  },
+  "inputInfo": {
+    "firstName": "姓",
+    "lastName": "名",
+    "email": "邮箱",
+    "password": "密码"
+  },
+  "navbar": {
+    "about": "关于",
+    "services": "服务",
+    "pricing": "价格",
+    "contact": "联系"
+  },
+  "greeting": {
+    "hello": "你好，",
+    "note": "查看每日安排",
+    "schedule": "今日计划"
+  },
+  "project": {
+    "completed": "已完成",
+    "newProjectBTN": "新建",
+    "newProjectMD": "新项目",
+    "createBTN": "创建",
+    "null": "空空如也...",
+    "newTask": "新建任务",
+    "newProjectName": "项目名称"
+  },
+  "rootPage": {
+    "hits": "安排学习时间",
+    "hitsText": "每天进步一点点",
+    "CTA": "开始学习",
+    "typeNature": "BBC聆听地球",
+    "typeRadio": "电台",
+    "typeAds": "广告",
+    "typeStats": "里程碑",
+    "hotsFM": "周选",
+    "hotsNews": "每日一听",
+    "winner": "今日之星",
+    "winnerSharing": "课代表分享"
+  },
+  "common": {
+    "language": "语言",
+    "searchPlaceholder": "搜索...",
+    "logout": "登出",
+    "level": "等级1",
+    "login": "请登入，",
+    "asc": "升序",
+    "desc": "降序",
+    "offline": "离线用户"
+  }
+}

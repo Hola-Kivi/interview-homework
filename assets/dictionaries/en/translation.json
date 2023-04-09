@@ -1,0 +1,63 @@
+{
+  "registerContent": {
+    "header": "Create a new account",
+    "linkText": "Already have an account?",
+    "subheader": "Just a few things to get started",
+    "buttonText": "Register"
+  },
+  "loginContent": {
+    "header": "Welcome back!",
+    "linkText": "Don't have an account?",
+    "subheader": "Enter your credentials to access your account",
+    "buttonText": "Login"
+  },
+  "inputInfo": {
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "email": "Email",
+    "password": "Password"
+  },
+  "navbar": {
+    "about": "About",
+    "services": "Services",
+    "pricing": "Pricing",
+    "contact": "Contact"
+  },
+  "greeting": {
+    "hello": "Hello,",
+    "note": "Check your daily tasks and schedule",
+    "schedule": "Today's Schedule"
+  },
+  "project": {
+    "completed": "completed",
+    "newProjectBTN": "+ New Project",
+    "newProjectMD": "New Project",
+    "createBTN": "Create",
+    "null": "no tasks...",
+    "newTask": "+ Create New",
+    "newProjectName": "project name"
+  },
+  "rootPage": {
+    "hits": "Schedule to learn",
+    "hitsText": "A little each day adds up",
+    "CTA": "Get started",
+    "typeNature": "BBC EARTH PODCAST",
+    "typeRadio": "FM",
+    "typeAds": "Advertisement",
+    "typeStats": "Milestone",
+    "hotsFM": "Week's Hits",
+    "hotsNews": "Daily News",
+    "winner": "STAR RISING",
+    "winnerSharing": "Subject-Rep's Sharing"
+  },
+  "common": {
+    "language": "Language",
+    "searchPlaceholder": "Search...",
+    "logout": "logout",
+    "level": "Lv1",
+    "login": "log in now?",
+    "desc": "Descending",
+    "asc": "Ascending",
+    "offline": "offline user"
+  }
+}

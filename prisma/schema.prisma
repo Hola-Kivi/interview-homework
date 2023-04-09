@@ -1,0 +1,128 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  email     String @unique
+  firstName String
+  lastName  String
+  password  String
+
+  projects Project[]
+  tasks    Task[]
+
+  videos   Video[]
+  videoLikes   VideoLike[]
+  comments     Comment[]
+}
+
+model Project {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  name    String
+  ownerId String
+  owner   User   @relation(fields: [ownerId], references: [id])
+
+  description String?
+  due         DateTime?
+  deleted     Boolean   @default(false)
+
+  tasks Task[]
+
+  @@unique([ownerId, name])
+  @@index([ownerId, id])
+}
+
+enum TASK_STATUS {
+  NOT_STARTED
+  STARTED
+  COMPLETED
+}
+
+model Task {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  status TASK_STATUS @default(NOT_STARTED)
+  name   String
+
+  ownerId String
+  owner   User   @relation(fields: [ownerId], references: [id])
+
+  projectId String
+  project   Project @relation(fields: [projectId], references: [id])
+
+  description String?
+  due         DateTime?
+  deleted     Boolean   @default(false)
+
+  @@index([ownerId])
+}
+
+model Video {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+
+  name        String?
+  title       String?    @unique
+  description String?
+  videoURL    String?
+  pic         String?
+
+  userId      String
+  user        User        @relation(fields: [userId], references: [id])
+
+  comments      Comment[]
+  videoLikes    VideoLike[]
+  chapters      Chapter[]
+}
+
+model Chapter {
+  id      String    @id @default(uuid())
+  title   String?
+  cover   String?
+  url     String?
+
+  videoId String
+  video   Video? @relation(fields: [videoId], references: [id])
+}
+
+model Comment {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+
+  text      String
+
+  ownerId   String
+  owner      User     @relation(fields: [ownerId], references: [id])
+
+  videoId   String
+  video      Video     @relation(fields: [videoId], references: [id])
+}
+
+model VideoLike {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  like      Int      @default(0)
+
+  ownerId   String
+  owner      User     @relation(fields: [ownerId], references: [id])
+
+  videoId   String
+  video      Video     @relation(fields: [videoId], references: [id])
+}
