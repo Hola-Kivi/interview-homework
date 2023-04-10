@@ -22,13 +22,10 @@ const getKey = (
   },
   videoId: string
 ) => {
-  // reached the end
   if (previousPageData && !previousPageData.data) return null;
 
-  // 首页，没有 `previousPageData`
   if (pageIndex === 0) return `/api/chapter?videoId=${videoId}`;
 
-  // 将游标添加到 API
   return `/api/chapter?cursor=${previousPageData.nextCursor}&videoId=${videoId}`;
 };
 
@@ -61,10 +58,9 @@ export default function VideoLink({ video }: Props) {
 
   return (
     <>
-      <main className="grid min-h-screen grid-cols-2 md:grid-cols-4 gap-4 md:gap-4">
+      <main className="grid min-h-screen grid-cols-2 md:grid-cols-4 gap-4">
         {data &&
           data.map((pageData, index) => {
-            // `data` 是每个页面 API 响应的数组。
             return pageData.data.map((item) => (
               <div
                 className="ring-1 ring-gray-200 p-2 flex flex-col justify-center"
@@ -72,13 +68,13 @@ export default function VideoLink({ video }: Props) {
               >
                 <Link href={`/post/chapter/${item.id}`}>
                   <Image
-                    className="aspect-video"
                     src={item.cover ?? ''}
-                    width={160}
-                    height={90}
+                    width={700}
+                    height={400}
                     alt={item.title ?? ''}
+                    object-contain="true"
                   />
-                  <div className="mt-2 h-12 text-ellipsis overflow-hidden">
+                  <div className="mt-2 h-12 text-ellipsis overflow-hidden text-xs md:text-base">
                     {item.title}
                   </div>
                 </Link>

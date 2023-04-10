@@ -1,15 +1,10 @@
+import fse from 'fs-extra';
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import { validateJWT } from '@/lib/auth';
 import { db } from '@/lib/db';
-import fse from 'fs-extra';
 import { delay } from '@/lib/async';
-
-const splitExt = (url: string) => {
-  let baseUrl = url.slice(0, url.lastIndexOf('/'));
-  let hash = url.slice(url.lastIndexOf('/') + 1, url.length);
-  return { baseUrl, hash };
-};
+import { validateJWT } from '@/lib/auth';
+import { splitExtPlayer } from '@/lib/splitExt';
 
 const getData = async (hash: string, userId: string) => {
   await delay(3500);
@@ -36,7 +31,7 @@ export default async function verifyUploadApi(
     const user = await validateJWT(req.cookies[process.env.COOKIE_NAME]);
     if (!user) return;
 
-    const { hash } = splitExt(req.url!);
+    const { hash } = splitExtPlayer(req.url!);
     const range = req.headers.range;
 
     if (!range) {

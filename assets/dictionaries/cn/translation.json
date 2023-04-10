@@ -1,4 +1,16 @@
 {
+  "landingText": {
+    "main1": "兴",
+    "main2": "因共享而",
+    "main3": "因价值而驱动",
+    "cta": "浏览全部课程"
+  },
+  "navContent": {
+    "product": "产品",
+    "support": "支持",
+    "explore": "探索",
+    "business": "业务"
+  },
   "loginContent": {
     "header": "欢迎!",
     "linkText": "没有账户？",

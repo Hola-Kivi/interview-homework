@@ -1,51 +1,60 @@
 export const i18n = {
   defaultLocale: 'en',
   locales: ['en', 'de', 'cn', 'jp', 'es', 'pt', 'fr', 'kr', 'it'],
-  localeIconA: [
+  localeIcon: [
     {
       lng: 'English',
       icon: 'fi fi-us',
       locale: 'en',
+      underline: 'no-underline',
     },
     {
       lng: 'Deutsch',
       icon: 'fi fi-de',
-      locale: 'de',
+      locale: '#',
+      underline: 'line-through',
     },
     {
       lng: '中文',
       icon: 'fi fi-cn',
       locale: 'cn',
+      underline: 'no-underline',
     },
     {
       lng: '日本語',
       icon: 'fi fi-jp',
-      locale: 'jp',
+      locale: '#',
+      underline: 'line-through',
     },
     {
       lng: 'Español',
       icon: 'fi fi-es',
-      locale: 'es',
+      locale: '#',
+      underline: 'line-through',
     },
     {
       lng: 'Português',
       icon: 'fi fi-pt',
-      locale: 'pt',
+      locale: '#',
+      underline: 'line-through',
     },
     {
       lng: 'Français',
       icon: 'fi fi-fr',
-      locale: 'fr',
+      locale: '#',
+      underline: 'line-through',
     },
     {
       lng: '한국어',
       icon: 'fi fi-kr',
-      locale: 'kr',
+      locale: '#',
+      underline: 'line-through',
     },
     {
       lng: 'Italiano',
       icon: 'fi fi-it',
-      locale: 'it',
+      locale: '#',
+      underline: 'line-through',
     },
   ],
   navHeader: ['About', 'Services', 'Pricing', 'Contact'],
@@ -63,5 +72,18 @@ export const languages = [
   'it',
 ] as const;
 export type ValidLocale = typeof i18n.locales[number];
-export type ValidLocaleIcon = typeof i18n.localeIconA;
+export type ValidLocaleIcon = typeof i18n.localeIcon;
 export type Locale = typeof i18n['locales'][number];
+export const textList = [
+  '你好世界',
+  'Hello World',
+  'こんにちは世界',
+  'Ciao mondo',
+  '헬로 월드',
+  'Hello Mundo',
+  'Hallo Welt',
+  'สวัสดีชาวโลก',
+  'Molo Lizwe',
+  'Chào thế giới',
+  'مرحبا بالعالم',
+];

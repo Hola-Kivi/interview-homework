@@ -28,7 +28,7 @@ export default function Head(req: VideoProps) {
         //   },
         // ]}
       />
-      <title>hometest JSON-LD</title>
+      <title>InterviewDemo-JSON-LD</title>
     </>
   );
 }

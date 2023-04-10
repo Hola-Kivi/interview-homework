@@ -14,11 +14,11 @@ const Sidebar = ({ lang }: Props) => {
       icon: 'Upload',
       link: `/${lang}/rep-sharing`,
     },
-    { label: 'Profile', icon: 'User', link: `/${lang}/` },
+    { label: 'Profile', icon: 'User', link: `#` },
     {
       label: 'Settings',
       icon: 'Settings',
-      link: `/${lang}/`,
+      link: `#`,
     },
   ];
 

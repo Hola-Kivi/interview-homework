@@ -26,7 +26,8 @@
       "@/styles/*": ["./styles/*"],
       "@/i18n/*": ["./i18n/*"],
       "@/seo/*": ["./seo/*"],
-      "@/public/*": ["./public/*"]
+      "@/public/*": ["./public/*"],
+      "@/prisma/*": ["./prisma/*"]
     }
   },
   "include": [

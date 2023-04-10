@@ -33,8 +33,6 @@ const getData = async () => {
     },
   });
 
-  // projects = beSerializable(projects);
-
   return { projects, user };
 };
 
@@ -76,35 +74,6 @@ export default async function Page({ params }: langProps) {
         {/* @ts-expect-error Server Component */}
         <Greetings lang={params.lang} user={user!} />
       </Suspense>
-      {/* <div className="overflow-x-auto flex items-center md:w-full md:flex-wrap snap-x snap-mandatory w-screen mt-3">
-        {projects.map((project) => (
-          <div className="md:min-w-5xl p-3 snap-start" key={project.id}>
-            <Link href={`/${params.lang}/project/${project.id}`}>
-              <ProjectCard
-                project={project}
-                transcript={projectScript.projectCard}
-              />
-            </Link>
-          </div>
-        ))}
-        <div className="w-1/3 p-3">
-          <NewProject script={projectScript.newProject} />
-        </div>
-      </div> */}
-      {/* <div className="2xl:container 2xl:mx-auto 2xl:px-0 py-3 px-10">
-        <Slider>
-          {projects.map((project) => (
-            <div className="p-3" key={project.id}>
-              <Link href={`/${params.lang}/project/${project.id}`}>
-                <ProjectCard
-                  project={project}
-                  transcript={projectScript.projectCard}
-                />
-              </Link>
-            </div>
-          ))}
-        </Slider>
-      </div> */}
       <div className="">
         <Carousel className="py-4 px-10 mt-8 flex flex-col items-center justify-center overflow-hidden">
           {projects.map((project) => (
@@ -131,4 +100,3 @@ export default async function Page({ params }: langProps) {
     </div>
   );
 }
-// animated wave line with Tailwind CSS

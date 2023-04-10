@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from 'react';
 import Button from '@/components/Button';
 import { uploadVideo } from '@/lib/api';
 import limit from '@/lib/limit';
+import { useRouter } from 'next/navigation';
 
 type userId = {
   userId: string;
@@ -47,12 +48,8 @@ export const request = async ({
 
     xhr.withCredentials = true;
 
-    xhr.upload.addEventListener('progress', (event) => {
-      // console.log('--- progress,', event);
-    });
-    xhr.upload.addEventListener('load', (event) => {
-      // console.log('--- load,', event);
-    });
+    xhr.upload.addEventListener('progress', (event) => {});
+    xhr.upload.addEventListener('load', (event) => {});
     xhr.upload.addEventListener('error', (event) => {
       console.log('--- error,', event);
     });
@@ -64,10 +61,7 @@ export const request = async ({
       });
     }
     xhr.send(data);
-    // xhr.onload = () => {
-    // this.ary = ary.filter((item) => item !== xhr);
-    //   resolve(JSON.parse(xhr.response));
-    // };
+
     xhr.onreadystatechange = () => {
       if (xhr.readyState !== 4) return;
       if (xhr.status >= 200 && xhr.status < 300) {
@@ -83,6 +77,8 @@ export const request = async ({
 };
 
 const NewPost = ({ userId }: userId) => {
+  const router = useRouter();
+
   const [loading, setLoading] = useState<Boolean>(false);
   const [videoAsset, setVideoAsset] = useState('');
   const [wrongFileType, setWrongFileType] = useState<Boolean>(false);
@@ -95,8 +91,9 @@ const NewPost = ({ userId }: userId) => {
   const progressArr = useRef<number[]>([]);
 
   const fileTypes = ['video/mp4', 'video/webm', 'video/ogg'];
-  const CHUNK_SIZE = 1024 * 1024 * 1; // 切片大小1MB
-  const MAX_POOL = 3; // 最大并发数
+  const fileAccept = '.mp4, .webm, .ogg';
+  const CHUNK_SIZE = 1024 * 1024 * 1;
+  const MAX_POOL = 3;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFiles([]);
@@ -144,9 +141,7 @@ const NewPost = ({ userId }: userId) => {
       item.precentage = parseInt(String((e.loaded / e.total) * 100));
     };
   };
-  const createCancelHandler = (xhr: XMLHttpRequest) => {
-    // ary.push(xhr);
-  };
+  const createCancelHandler = (xhr: XMLHttpRequest) => {};
   // ts1005-error, expected ':'
   const createDataFormRequest = async (
     key: string,
@@ -157,7 +152,6 @@ const NewPost = ({ userId }: userId) => {
     const handleUpload = async () => {
       setLoading(true);
       try {
-        // router.refresh();
       } catch (e) {
         setError('Error...');
       } finally {
@@ -190,14 +184,13 @@ const NewPost = ({ userId }: userId) => {
           setVideoAsset(`/api/player/${hash}`);
 
           console.log('上传成功');
+          router.refresh();
         });
       }
     });
   };
   const verifyUpload = async (filename: string, hash: string) => {
     return new Promise<resultReq>(async (resolve, reject) => {
-      // const data = await verifyUploadApi({ filename, hash, user });
-
       const data = await request({
         method: 'POST',
         url: '/api/verify',
@@ -226,13 +219,11 @@ const NewPost = ({ userId }: userId) => {
         if (typeof shouldUpload === 'boolean') {
           if (!shouldUpload) {
             console.log('秒传成功');
-            // setProgress('100');
           } else {
             console.log('验证OK');
             await createDataFormRequest(key, hash, fileName, uploadList);
           }
         } else {
-          // continue...
           await createDataFormRequest(key, hash, fileName, uploadList);
         }
       } else {
@@ -252,12 +243,6 @@ const NewPost = ({ userId }: userId) => {
   };
   const handleFinishedUploadProgress = (size: number, chunkIndex: number) => {
     console.log('finished 100%');
-    // progressArr.current[chunkIndex] = size * 100;
-    // const curTotal = progressArr.current.reduce(
-    //   (accumulator, currentValue) => accumulator + currentValue,
-    //   0
-    // );
-    // setProgress((curTotal / totalSize.current).toFixed(2));
   };
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -293,7 +278,7 @@ const NewPost = ({ userId }: userId) => {
         </div>
         <input
           type="file"
-          // accept={fileAccept}
+          accept={fileAccept}
           multiple
           onChange={handleChange}
           className="opacity-0"

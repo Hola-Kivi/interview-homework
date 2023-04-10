@@ -35,7 +35,6 @@ const buttonClasses = cva(
           'hover:bg-gray-100',
           'border-solid',
           'border-2',
-          // 'border-gray-800',
         ],
         text: [
           'text-base',
@@ -74,7 +73,6 @@ export interface ButtonProps
   extends Omit<React.HTMLAttributes<HTMLButtonElement>, 'disabled' | 'type'>,
     VariantProps<typeof buttonClasses> {
   children: React.ReactNode;
-  // loading: boolean;
 }
 
 const Button: FC<ButtonProps> = ({

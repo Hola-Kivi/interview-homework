@@ -1,7 +1,6 @@
 import { ValidLocale } from '@/i18n/i18n-config';
 import { getTranslation } from '@/i18n/getDictionary';
 
-import Button from '@/components/Button';
 import Card from '@/components/Card';
 import { langProps } from '@/lib/Types';
 
@@ -30,7 +29,7 @@ const Greetings = async ({ lang, user }: langProps) => {
         </h4>
       </div>
       <div className="ml-auto">
-        <button className="btn btn-sm">{greetings.schedule}</button>
+        <button className="btn btn-xs md:btn-lg">{greetings.schedule}</button>
       </div>
     </Card>
   );

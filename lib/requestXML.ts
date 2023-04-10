@@ -25,10 +25,10 @@ export const request = async ({
     xhr.withCredentials = true;
 
     xhr.upload.addEventListener('progress', (event) => {
-      // console.log('--- progress,', event);
+      console.log('--- progress,', event);
     });
     xhr.upload.addEventListener('load', (event) => {
-      // console.log('--- load,', event);
+      console.log('--- load,', event);
     });
     xhr.upload.addEventListener('error', (event) => {
       console.log('--- error,', event);
@@ -41,10 +41,7 @@ export const request = async ({
       });
     }
     xhr.send(data);
-    // xhr.onload = () => {
-    // this.ary = ary.filter((item) => item !== xhr);
-    //   resolve(JSON.parse(xhr.response));
-    // };
+
     xhr.onreadystatechange = () => {
       if (xhr.readyState !== 4) return;
       if (xhr.status >= 200 && xhr.status < 300) {

@@ -16,12 +16,10 @@ const verifyJWT = async (jwt: string) => {
 };
 
 function getLocale(request: NextRequest): string | undefined {
-  // Negotiator expects plain object so we need to transform headers
   const negotiatorHeaders: Record<string, string> = {};
 
   request.headers?.forEach((value, key) => (negotiatorHeaders[key] = value));
 
-  // Use negotiator and intl-localematcher to get best locale
   let languages = new Negotiator({ headers: negotiatorHeaders }).languages();
 
   // @ts-ignore locales are readonly
@@ -55,7 +53,6 @@ export async function middleware(request: NextRequest) {
   try {
     await verifyJWT(jwt.value);
 
-    // REMOVE default locale
     if (
       pathname.startsWith(`/${i18n.defaultLocale}/`) ||
       pathname === `/${i18n.defaultLocale}`
@@ -65,7 +62,6 @@ export async function middleware(request: NextRequest) {
       return NextResponse.redirect(request.nextUrl);
     }
 
-    // Redirect if there is no locale
     const pathnameIsMissingLocale = i18n.locales.every(
       (locale) =>
         !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`

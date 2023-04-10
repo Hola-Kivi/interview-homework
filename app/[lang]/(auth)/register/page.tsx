@@ -21,18 +21,33 @@ const getScript = async (lang: ValidLocale) => {
     email: translate('inputInfo.email'),
     password: translate('inputInfo.password'),
   };
+  const landingContent = {
+    main1: translate('landingText.main1'),
+    main2: translate('landingText.main2'),
+    main3: translate('landingText.main3'),
+    cta: translate('landingText.cta'),
+  };
 
-  return registerContent;
+  const navContent = {
+    product: translate('navContent.product'),
+    support: translate('navContent.support'),
+    explore: translate('navContent.explore'),
+    business: translate('navContent.business'),
+  };
+
+  return { registerContent, landingContent, navContent };
 };
 
 export default async function Register({ params }: langProps) {
-  const registerContent = await getScript(params.lang);
+  const { registerContent, landingContent, navContent } = await getScript(
+    params.lang
+  );
 
   return (
     <div className="h-full overflow-y-auto">
-      <LocaleHeader langsIcon={langSwitcher} />
+      <LocaleHeader langsIcon={langSwitcher} dictionary={navContent} />
       <main className="relative h-[200vh]">
-        <Landing />
+        <Landing dictionary={landingContent} />
       </main>
       <section className="relative z-40 -mt-[100vh] min-h-screen rounded-2xl flex items-center justify-center rainbow-mesh">
         <AuthForm

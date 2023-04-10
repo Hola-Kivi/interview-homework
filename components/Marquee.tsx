@@ -35,10 +35,7 @@ const Marquee: FC<Props> = ({
         </div>
 
         <div
-          className={classNames(
-            'absolute top-0 marquee2 text-lime-500',
-            className
-          )}
+          className={classNames('absolute top-0 marquee2', className)}
           style={contentStyles}
         >
           {children}

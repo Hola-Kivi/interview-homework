@@ -10,7 +10,7 @@ export type langProps = {
   params: {
     lang: ValidLocale;
   };
-  lang?: ValidLocale;
+  lang: ValidLocale;
 };
 
 export type taskProps = {

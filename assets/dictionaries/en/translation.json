@@ -1,4 +1,16 @@
 {
+  "landingText": {
+    "main1": "Powered",
+    "main2": "By Sharing",
+    "main3": "Driven By Values",
+    "cta": "View all courses"
+  },
+  "navContent": {
+    "product": "Product",
+    "support": "Support",
+    "explore": "Explore",
+    "business": "Bussiness"
+  },
   "registerContent": {
     "header": "Create a new account",
     "linkText": "Already have an account?",

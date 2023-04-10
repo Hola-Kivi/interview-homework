@@ -65,7 +65,7 @@ svg {
     @apply rounded-lg text-white font-medium;
   }
   .btn-xs {
-    @apply h-[36px] px-2 text-sm;
+    @apply h-min text-sm p-2;
   }
   .btn-sm {
     @apply h-[48px] px-4 text-sm;

@@ -2,13 +2,9 @@ import { NextApiRequest, NextApiResponse } from 'next';
 
 import path from 'path';
 import fse from 'fs-extra';
+import { splitExtMerge } from '@/lib/splitExt';
 import { validateJWT } from '@/lib/auth';
 
-const splitExt = (filename: string) => {
-  let name = filename.slice(0, filename.lastIndexOf('.'));
-  let ext = filename.slice(filename.lastIndexOf('.') + 1, filename.length);
-  return { name, ext };
-};
 const pipeStream = (path: string, writeSteam: fse.WriteStream) => {
   return new Promise<void>((resolve) => {
     const readStream = fse.createReadStream(path);
@@ -24,13 +20,15 @@ export default async function verifyUploadApi(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  // const user = await validateJWT(req.cookies[process.env.COOKIE_NAME]);
+  if (!process.env.COOKIE_NAME) return;
+  const user = await validateJWT(req.cookies[process.env.COOKIE_NAME]);
+  if (!user) return;
 
   if (req.method === 'POST') {
     const { filename, hash, userId, CHUNK_SIZE } = JSON.parse(req.body);
     const UPLOAD_DIR = path.resolve(__dirname, `../uploads/${userId}`);
 
-    const { ext } = splitExt(filename);
+    const { ext } = splitExtMerge(filename);
     const tempDir = path.resolve(UPLOAD_DIR, hash);
     const cD = path.resolve(UPLOAD_DIR, `${hash}.${ext}`);
 
@@ -71,35 +69,3 @@ export const config = {
     externalResolver: true,
   },
 };
-// export const config = {
-//   api: {
-//     bodyParser: false,
-//   },
-// };
-
-//   .sort((a, b) => Number(a) - Number(b))
-//   .forEach((chunkPath) => {
-//     // 合并文件
-//     fse.appendFileSync(
-//       path.resolve(UPLOAD_DIR, `${hash}.${ext}`),
-//       fse.readFileSync(`${tempDir}/${chunkPath}`)
-//     );
-//   });
-// // 删除临时文件夹
-// fse.removeSync(tempDir);
-// // 返回文件地址
-// req.body = '合并成功';
-
-// res.status(201).json(req.body);
-
-// const resolvePost = (req: NextApiRequest) => {
-//   return new Promise((resolve) => {
-//     let chunk = '';
-//     req.on('data', (data) => {
-//       chunk += data;
-//     });
-//     req.on('end', () => {
-//       resolve(JSON.parse(chunk));
-//     });
-//   });
-// };

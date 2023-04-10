@@ -10,7 +10,7 @@ type postParams = {
 
 const PostCard = ({ src, userId }: postParams) => {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const apiPath = typeof src === 'string' ? `/api/player/${src}` : false;
+  const apiPath = src ? `/api/player/${src}` : '';
 
   useEffect(() => {
     if (videoRef.current) {
@@ -22,10 +22,12 @@ const PostCard = ({ src, userId }: postParams) => {
 
   return (
     <>
-      {typeof apiPath === 'string' ? (
+      <NewPost userId={userId} />
+
+      {apiPath ? (
         <video
           ref={videoRef}
-          className="rounded-xl h-[462px] mt-16 bg-black"
+          className="rounded-xl h-[462px] mt-16"
           controls
           loop
           autoPlay
@@ -34,7 +36,7 @@ const PostCard = ({ src, userId }: postParams) => {
           <source src={apiPath} type="video/mp4" />
         </video>
       ) : (
-        <NewPost userId={userId} />
+        ''
       )}
     </>
   );

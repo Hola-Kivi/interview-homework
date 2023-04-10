@@ -1,6 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import nextConnect from 'next-connect';
-
 import fse from 'fs-extra';
 import multer from 'multer';
 import path from 'path';

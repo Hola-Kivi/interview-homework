@@ -13,7 +13,7 @@ const inter = Inter({
 export default async function RootLayout({ children, params }: langProps) {
   return (
     <html lang={params.lang} className={inter.variable}>
-      <body className="h-screen rainbow-mesh p-6">
+      <body className="h-screen rainbow-mesh p-6 ">
         <GlassPane className="h-full overflow-hidden">{children}</GlassPane>
         <div id="modal"></div>
       </body>

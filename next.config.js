@@ -8,7 +8,6 @@ const nextConfig = {
     appDir: true,
     serverComponentsExternalPackages: ['bcrypt', 'spark-md5'],
   },
-  // swcMinify: true,
   images: {
     domains: [
       'gcdp.oss-cn-qingdao.aliyuncs.com',

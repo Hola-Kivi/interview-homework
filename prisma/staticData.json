@@ -1,0 +1,81 @@
+{
+  "lectures": [
+    {
+      "id": "01991de8-83e8-49ef-8030-fa4ec9ab4541",
+      "title": "相似三角形和三角比",
+      "cover": "https://gcdp.oss-cn-qingdao.aliyuncs.com/201603/3/1457033027742_9570.jpg",
+      "url": "http://alicdn.yxgapp.com/miniVideos/37ad2868-d32a-4d7f-bb6f-18513f056d4b.mp4",
+      "videoId": "3f2246d7-ff40-46c7-a992-13315314a30c"
+    },
+    {
+      "id": "09cfc8ea-0849-4e75-9d79-be49402ca627",
+      "title": "Challenge problem: Verify identities",
+      "cover": "https://gcdp.oss-cn-qingdao.aliyuncs.com/201603/3/1457033049856_9314.jpg",
+      "url": "http://alicdn.yxgapp.com/miniVideos/eac41dac-ac22-42d0-8371-2abe60ec67c2.mp4",
+      "videoId": "3f2246d7-ff40-46c7-a992-13315314a30c"
+    },
+    {
+      "id": "0c5897a4-f885-42a3-acd1-dbcf5a3c75b7",
+      "title": "How to use cotangent in order to solve for a side in a right triangle (example)",
+      "cover": "https://gcdp.oss-cn-qingdao.aliyuncs.com/201603/3/1457033171164_3792.jpg",
+      "url": "http://alicdn.yxgapp.com/miniVideos/cae558d2-8427-40f5-9ecb-dae6cba5c788.mp4",
+      "videoId": "3f2246d7-ff40-46c7-a992-13315314a30c"
+    },
+    {
+      "id": "0d4ec37e-0c9d-4b3a-a2ec-2ee7f85b92ef",
+      "title": "如何利用三角法求直角三角形中未知边的长度（例题）",
+      "cover": "https://gcdp.oss-cn-qingdao.aliyuncs.com/201603/3/1457032987406_6451.jpg",
+      "url": "http://alicdn.yxgapp.com/miniVideos/bf5d6b8f-adbc-43f3-9b69-ba5ddfda79f8.mp4",
+      "videoId": "3f2246d7-ff40-46c7-a992-13315314a30c"
+    },
+    {
+      "id": "12d73823-95e0-4329-9518-f2470369628e",
+      "title": "The sine and cosine of complementary example",
+      "cover": "https://gcdp.oss-cn-qingdao.aliyuncs.com/201603/3/1457033092022_6360.jpg",
+      "url": "http://alicdn.yxgapp.com/miniVideos/48fc34d4-d450-42f9-837c-58a9e963f93a.mp4",
+      "videoId": "3f2246d7-ff40-46c7-a992-13315314a30c"
+    },
+    {
+      "id": "13215232-6ea0-4b5b-98ba-dd92f1b4dba3",
+      "title": "How to find all solutions to an equation of the form sin(x)=d (example)",
+      "cover": "https://gcdp.oss-cn-qingdao.aliyuncs.com/201603/3/1457034398779_4827.jpg",
+      "url": "http://alicdn.yxgapp.com/miniVideos/505ae5db-c1e7-4cec-a758-17503f80931a.mp4",
+      "videoId": "3f2246d7-ff40-46c7-a992-13315314a30c"
+    },
+    {
+      "id": "172940d6-6673-4cc9-83a7-496aecc62649",
+      "title": "Tau versus pi",
+      "cover": "https://gcdp.oss-cn-qingdao.aliyuncs.com/201603/3/1457033772233_4977.jpg",
+      "url": "http://alicdn.yxgapp.com/miniVideos/ede256ac-0f0b-4135-8e3c-76b2b7ed4195.mp4",
+      "videoId": "3f2246d7-ff40-46c7-a992-13315314a30c"
+    },
+    {
+      "id": "18226c06-8e64-4b19-8492-906e97c81f47",
+      "title": "How to find a missing angle measure using the law of cosines (example)",
+      "cover": "https://gcdp.oss-cn-qingdao.aliyuncs.com/201603/3/1457033262754_6317.jpg",
+      "url": "http://alicdn.yxgapp.com/miniVideos/a6c66c92-8b1c-4907-be37-ddd355e8d1ff.mp4",
+      "videoId": "3f2246d7-ff40-46c7-a992-13315314a30c"
+    },
+    {
+      "id": "18f7b908-2315-4947-a40b-aba5cb102ac3",
+      "title": "怎样在有一个未知角的情况下解一个直角三角形(示例)",
+      "cover": "https://gcdp.oss-cn-qingdao.aliyuncs.com/201603/3/1457033004958_609.jpg",
+      "url": "http://alicdn.yxgapp.com/miniVideos/bb64357e-cadf-4f07-9dc5-045144ae4943.mp4",
+      "videoId": "3f2246d7-ff40-46c7-a992-13315314a30c"
+    },
+    {
+      "id": "1d7b5d37-a8c6-4dc6-84b7-363723c0bb90",
+      "title": "How to convert from radians to degrees (example)",
+      "cover": "https://gcdp.oss-cn-qingdao.aliyuncs.com/201603/3/1457033392911_8512.jpg",
+      "url": "http://alicdn.yxgapp.com/miniVideos/ecac6f79-3023-40f3-b4c6-a7b34c97d01e.mp4",
+      "videoId": "3f2246d7-ff40-46c7-a992-13315314a30c"
+    },
+    {
+      "id": "1fec2673-ab5e-4355-8552-798ce6ce901d",
+      "title": "Matching the SOH CAH TOA and the unit circle definitions of the trigonometric functions",
+      "cover": "https://gcdp.oss-cn-qingdao.aliyuncs.com/201603/3/1457033475745_5416.jpg",
+      "url": "http://alicdn.yxgapp.com/miniVideos/aff76c2e-72f3-4e8f-984b-08a48937ff05.mp4",
+      "videoId": "3f2246d7-ff40-46c7-a992-13315314a30c"
+    }
+  ]
+}

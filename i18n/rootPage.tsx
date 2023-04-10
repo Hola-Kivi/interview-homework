@@ -11,7 +11,7 @@ import {
   svgFM,
 } from '@/public/svg/svgRoot';
 
-export const langSwitcher: ValidLocaleIcon = i18n.localeIconA;
+export const langSwitcher: ValidLocaleIcon = i18n.localeIcon;
 export const getRootScript = async (lang: ValidLocale) => {
   const translate = await getTranslation(lang);
 

@@ -52,11 +52,6 @@ const Carousel: FC<Props> = ({ children, className }) => {
     };
   });
 
-  // const handlers = useSwipeable({
-  //   onSwipedLeft: () => updateIndex(activeIndex + 1)
-  //   onSwipedRight: () => updateIndex(activeIndex - 1)
-  // })
-
   return (
     <div
       className={(classNames(''), className)}

@@ -23,7 +23,7 @@ export default function CTA({ rootCTA, lang }: ctaParams) {
         </h2>
       </div>
       <Link href={`${lang}/home`}>
-        <Button className="rounded-xl text-sm  md:text-xl">
+        <Button className="rounded-xl text-sm md:text-xl">
           {rootCTA.typeCTA}
         </Button>
       </Link>
