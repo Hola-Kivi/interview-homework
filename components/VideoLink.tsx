@@ -7,12 +7,18 @@ import Link from 'next/link';
 
 import useSWRInfinite from 'swr/infinite';
 
-import { Chapter, Video } from '@prisma/client';
+import { Chapter } from '@prisma/client';
 import useOnScreen from '@/lib/useOnScreen';
 
 type Result = { data: Chapter[]; nextCursor: string };
 type Props = {
-  video: Video;
+  video: {
+    id: string;
+    cover: string;
+    title: string;
+    url: string;
+    videoId: string;
+  };
 };
 const getKey = (
   pageIndex: number,

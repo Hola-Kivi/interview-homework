@@ -1,4 +1,4 @@
-import { request } from '@/components/NewPost';
+import { request } from '@/lib/requestXML';
 
 export default async function limit(tasks: FormData[], concurrency: number) {
   async function runTasks(tasksIterator: Array<any>) {

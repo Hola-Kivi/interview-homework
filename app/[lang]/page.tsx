@@ -33,22 +33,23 @@ const getVideo = async () => {
       videoURL: true,
     },
   });
+
   return { video, user };
 };
 
 export default async function Page({ params }: langProps) {
-  const rootTranscript = await getRootScript(params.lang);
-
-  let path;
   const { video, user } = await getVideo();
   if (!user) return;
-  if (!video?.videoURL) return (path = '');
 
-  path = splitExt(video?.videoURL);
+  let path;
+  if (video?.videoURL) {
+    path = splitExt(video?.videoURL);
+  }
+
+  const rootTranscript = await getRootScript(params.lang);
 
   return (
     <div className="h-full overflow-y-auto scrollbar-hide px-2">
-      {/* header-manu */}
       <Header
         userId={user.firstName}
         lang={params.lang}
@@ -56,11 +57,10 @@ export default async function Page({ params }: langProps) {
         headerTranscript={rootTranscript.common}
       />
       <main className="p-4 space-y-6">
-        {/* sec-CTA */}
         <section>
           <CTA rootCTA={rootTranscript.rootPage} lang={params.lang} />
         </section>
-        {/* sec-panel */}
+
         <section className="grid md:grid-cols-2 gap-3">
           {rootTranscript.secContent.map((sec) => (
             <Card key={sec.id} className="flex items-center">
@@ -81,12 +81,11 @@ export default async function Page({ params }: langProps) {
             </Card>
           ))}
         </section>
-        {/* 在线课堂 */}
+
         <section className="flex items-center">
           <Card className="mx-auto px-6 py-4">
             <div className="flex flex-col gap-y-2 lg:flex-row lg:gap-x-10">
               <div className="flex-1 flex flex-col gap-y-2 lg:gap-y-10">
-                {/* text */}
                 <div className="grow flex flex-col sm:flex-row sm:items-center md:items-center justify-between">
                   <div className="lg:ml-4">
                     <h2 className="text-3xl tracking-[10%] uppercase mb-2 text-accent lg:text-5xl lg:mb-6 xl:text-6xl xl:mb-6">
@@ -106,12 +105,10 @@ export default async function Page({ params }: langProps) {
                     </button>
                   </Link>
                 </div>
-                {/* image */}
+
                 <div className="group relative overflow-hidden border-4 border-white/50 rounded-xl">
-                  {/* overlay-z-10 */}
                   <Link href={`#`}>
                     <div className="z-10 group-hover:bg-black/70 w-full h-full absolute transition-all duration-300"></div>
-                    {/* img */}
                   </Link>
                   <Image
                     src="https://gcdp.oss-cn-qingdao.aliyuncs.com/201603/3/1457032987406_6451.jpg"
@@ -120,16 +117,14 @@ export default async function Page({ params }: langProps) {
                     height={400}
                     priority
                     object-contain="true"
-                    className=" group-hover:scale-125 transition-all duration-500"
+                    className="group-hover:scale-125 transition-all duration-500"
                   />
 
-                  {/* pre-title-z-20 */}
                   <div className="z-20 absolute -bottom-full left-12 group-hover:bottom-24 transition-all duration-500">
-                    <span className="text-gradient">234</span>
+                    <span className="text-gradient">demo</span>
                   </div>
-                  {/* title-z-20 */}
                   <div className="z-20 absolute -bottom-full left-12 group-hover:bottom-14 transition-all duration-700">
-                    <span className="text-3xl text-white">234</span>
+                    <span className="text-3xl text-white">demo</span>
                   </div>
                 </div>
               </div>
@@ -139,7 +134,7 @@ export default async function Page({ params }: langProps) {
             </div>
           </Card>
         </section>
-        {/* 多语言 */}
+
         <section className="">
           <h2 className="text-2xl font-medium tracking-wide text-center mt-4">
             支持多语言
@@ -149,6 +144,7 @@ export default async function Page({ params }: langProps) {
               className="py-1 md:py-6 whitespace-nowrap"
               gradientColor="#F8FBFD"
               gradientWidth={100}
+              direction="left"
               onHover
             >
               {textList.map((item) => (
@@ -159,7 +155,7 @@ export default async function Page({ params }: langProps) {
             </Marquee>
           </Card>
         </section>
-        {/* sec-rep-sharing */}
+
         <section className="w-5/6 mx-auto mt-10">
           <Card className="">
             <PostCard src={path} userId={user.id} />

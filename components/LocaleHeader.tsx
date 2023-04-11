@@ -54,6 +54,7 @@ export default function LocaleHeader({
         >
           <GlobalIcon />
         </Button>
+
         {isOpen && (
           <div className="glass absolute z-10 top-14 right-8 w-40 shadow leading-3 rounded-lg">
             <div className="p-3">

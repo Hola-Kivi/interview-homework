@@ -4,7 +4,7 @@ import { useEffect, useRef } from 'react';
 import NewPost from '@/components/NewPost';
 
 type postParams = {
-  src: string | boolean;
+  src: string | undefined;
   userId: string;
 };
 

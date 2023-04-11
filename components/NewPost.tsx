@@ -1,30 +1,19 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-
-import Button from '@/components/Button';
-import { uploadVideo } from '@/lib/api';
-import limit from '@/lib/limit';
 import { useRouter } from 'next/navigation';
+
+import limit from '@/lib/limit';
+import { uploadVideo } from '@/lib/api';
+import { request } from '@/lib/requestXML';
+import Button from '@/components/Button';
 
 type userId = {
   userId: string;
 };
-type Header = {
-  [index: string]: string;
-};
-type reqParams = {
-  url: string;
-  method: string;
-  data: string | FormData;
-  headers?: Header;
-  onAbort?(e: XMLHttpRequest): void;
-  requestList?: XMLHttpRequest[];
-};
+
 type resultReq = { shouldUpload: boolean; uploadList: []; url?: string };
-interface FileChunk {
-  files: File[];
-}
+
 type FileBlob = {
   file: Blob;
 }[];
@@ -35,62 +24,15 @@ interface FileIndex {
 let splitFilename = (prop = '') => {
   return prop.slice(0, prop.lastIndexOf('_'));
 };
-export const request = async ({
-  data,
-  method,
-  url,
-  headers,
-  onAbort = (xhr) => xhr,
-}: reqParams) => {
-  return new Promise<resultReq>((resolve, reject) => {
-    const xhr = new XMLHttpRequest();
-    onAbort(xhr);
-
-    xhr.withCredentials = true;
-
-    xhr.upload.addEventListener('progress', (event) => {});
-    xhr.upload.addEventListener('load', (event) => {});
-    xhr.upload.addEventListener('error', (event) => {
-      console.log('--- error,', event);
-    });
-
-    xhr.open(method, url);
-    if (headers) {
-      Object.keys(headers).forEach((key) => {
-        xhr.setRequestHeader(key, headers[key]);
-      });
-    }
-    xhr.send(data);
-
-    xhr.onreadystatechange = () => {
-      if (xhr.readyState !== 4) return;
-      if (xhr.status >= 200 && xhr.status < 300) {
-        resolve(JSON.parse(xhr.response));
-      } else {
-        reject({
-          status: xhr.status,
-          statusText: xhr.statusText,
-        });
-      }
-    };
-  });
-};
 
 const NewPost = ({ userId }: userId) => {
   const router = useRouter();
 
-  const [loading, setLoading] = useState<Boolean>(false);
   const [videoAsset, setVideoAsset] = useState('');
-  const [wrongFileType, setWrongFileType] = useState<Boolean>(false);
-  const [error, setError] = useState('');
   const [files, setFiles] = useState<File[]>();
 
-  const [progress, setProgress] = useState('0');
-
   const targetRequest = useRef<FileIndex>();
-  const progressArr = useRef<number[]>([]);
 
-  const fileTypes = ['video/mp4', 'video/webm', 'video/ogg'];
   const fileAccept = '.mp4, .webm, .ogg';
   const CHUNK_SIZE = 1024 * 1024 * 1;
   const MAX_POOL = 3;
@@ -118,8 +60,10 @@ const NewPost = ({ userId }: userId) => {
   const createChunk = (files: File[]) => {
     let fileChunk = files.reduce((prev, cur, index) => {
       prev[`${cur.name}_${index}`] = handleChunk(cur);
+
       return prev;
     }, {} as FileIndex);
+
     return fileChunk;
   };
   const calcHash = async (fileChunkList: FileBlob) => {
@@ -136,29 +80,65 @@ const NewPost = ({ userId }: userId) => {
       };
     });
   };
-  const createProgressHandler = (item: any) => {
-    return (e: ProgressEvent) => {
-      item.precentage = parseInt(String((e.loaded / e.total) * 100));
-    };
+  const verifyUpload = async (filename: string, hash: string) => {
+    return new Promise<resultReq>(async (resolve, reject) => {
+      const data = await request({
+        method: 'POST',
+        url: '/api/verify',
+        data: JSON.stringify({
+          filename,
+          hash,
+          userId,
+        }),
+      });
+      resolve(data);
+    });
   };
-  const createCancelHandler = (xhr: XMLHttpRequest) => {};
-  // ts1005-error, expected ':'
+  const mergeFile = async (filename: string, hash: string) => {
+    return new Promise<resultReq>(async (resolve) => {
+      const merge = await request({
+        data: JSON.stringify({ filename, hash, userId, CHUNK_SIZE }),
+        method: 'POST',
+        url: '/api/merge',
+      });
+      resolve(merge);
+    });
+  };
+
+  const uploadFiles = async () => {
+    if (!files) return;
+    const fileChunkList = createChunk(files);
+
+    targetRequest.current = fileChunkList;
+
+    for (let key in targetRequest.current) {
+      let fileName = splitFilename(key);
+      let hash = await calcHash(targetRequest.current[key]);
+
+      const { shouldUpload, uploadList } = await verifyUpload(fileName, hash);
+
+      if (shouldUpload !== undefined) {
+        if (typeof shouldUpload === 'boolean') {
+          if (!shouldUpload) {
+            console.log('秒传成功');
+          } else {
+            console.log('验证OK');
+            await createDataFormRequest(key, hash, fileName, uploadList);
+          }
+        } else {
+          await createDataFormRequest(key, hash, fileName, uploadList);
+        }
+      } else {
+        console.log('验证失败');
+      }
+    }
+  };
   const createDataFormRequest = async (
     key: string,
     hash: string,
     fileName: string,
     uploadedFiles: []
   ) => {
-    const handleUpload = async () => {
-      setLoading(true);
-      try {
-      } catch (e) {
-        setError('Error...');
-      } finally {
-        setLoading(false);
-      }
-    };
-
     let requestList = targetRequest.current?.[key].map((chunk, index) => {
       const formData = new FormData();
       formData.append('userId', userId);
@@ -189,61 +169,7 @@ const NewPost = ({ userId }: userId) => {
       }
     });
   };
-  const verifyUpload = async (filename: string, hash: string) => {
-    return new Promise<resultReq>(async (resolve, reject) => {
-      const data = await request({
-        method: 'POST',
-        url: '/api/verify',
-        data: JSON.stringify({
-          filename,
-          hash,
-          userId,
-        }),
-      });
-      resolve(data);
-    });
-  };
-  const uploadFiles = async () => {
-    if (!files) return;
-    const fileChunkList = createChunk(files);
 
-    targetRequest.current = fileChunkList;
-
-    for (let key in targetRequest.current) {
-      let fileName = splitFilename(key);
-      let hash = await calcHash(targetRequest.current[key]);
-
-      const { shouldUpload, uploadList } = await verifyUpload(fileName, hash);
-
-      if (shouldUpload !== undefined) {
-        if (typeof shouldUpload === 'boolean') {
-          if (!shouldUpload) {
-            console.log('秒传成功');
-          } else {
-            console.log('验证OK');
-            await createDataFormRequest(key, hash, fileName, uploadList);
-          }
-        } else {
-          await createDataFormRequest(key, hash, fileName, uploadList);
-        }
-      } else {
-        console.log('验证失败');
-      }
-    }
-  };
-  const mergeFile = async (filename: string, hash: string) => {
-    return new Promise<resultReq>(async (resolve) => {
-      const merge = await request({
-        data: JSON.stringify({ filename, hash, userId, CHUNK_SIZE }),
-        method: 'POST',
-        url: '/api/merge',
-      });
-      resolve(merge);
-    });
-  };
-  const handleFinishedUploadProgress = (size: number, chunkIndex: number) => {
-    console.log('finished 100%');
-  };
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {

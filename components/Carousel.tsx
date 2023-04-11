@@ -40,10 +40,10 @@ const Carousel: FC<Props> = ({ children, className }) => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      if (false) {
+      if (!paused) {
         updateIndex(activeIndex + 1);
       }
-    }, 3000);
+    }, 3500);
 
     return () => {
       if (interval) {
@@ -77,15 +77,16 @@ const Carousel: FC<Props> = ({ children, className }) => {
         >
           Prev
         </Button>
-        {/* indicator */}
+
         {React.Children.map(children, (child, index) => {
           return (
             <Button
               intent="text"
               size="small"
-              className={`${
-                index === activeIndex ? 'active' : ''
-              }, text-xs underline`}
+              className={classNames(
+                'text-xs underline',
+                index === activeIndex ? '!text-base' : ''
+              )}
               onClick={() => {
                 updateIndex(index);
               }}
@@ -94,6 +95,7 @@ const Carousel: FC<Props> = ({ children, className }) => {
             </Button>
           );
         })}
+
         <Button
           intent="text"
           className="font-extralight text-base !px-0 ml-1"

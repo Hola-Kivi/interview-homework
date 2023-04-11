@@ -1,11 +1,10 @@
 import { cookies } from 'next/headers';
 
 import { getUserFromCookie } from '@/lib/auth';
+import { beSerializable } from '@/lib/beSerializable';
 import { db } from '@/lib/db';
 
 import TasksCard from '@/components/TasksCard';
-import { beSerializable } from '@/lib/beSerializable';
-import { VideoProps } from '../../post/[id]/page';
 import { ValidLocale } from '@/i18n/i18n-config';
 
 const getData = async (id: string) => {
@@ -31,7 +30,7 @@ export default async function ProjectPage({ params }: paramsProps) {
   if (!project) return;
 
   return (
-    <div className="h-full overflow-y-auto pr-6 w-1/1">
+    <div className="h-full overflow-y-auto px-6 flex items-center justify-center">
       {/* @ts-expect-error Server Component */}
       <TasksCard
         tasks={project.tasks}

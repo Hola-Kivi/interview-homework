@@ -13,12 +13,12 @@ import NewProject from '@/components/NewProject';
 import Greetings from '@/components/Greetings';
 import TasksCard from '@/components/TasksCard';
 import Header from '@/components/Header';
+import Carousel, { CarouselItem } from '@/components/Carousel';
+import Card from '@/components/Card';
 
 import { ValidLocale } from '@/i18n/i18n-config';
 import { getTranslation } from '@/i18n/getDictionary';
 import { getRootScript, langSwitcher } from '@/i18n/rootPage';
-import Carousel, { CarouselItem } from '@/components/Carousel';
-import Card from '@/components/Card';
 
 const getData = async () => {
   await delay(3500);
@@ -61,8 +61,7 @@ export default async function Page({ params }: langProps) {
 
   return (
     <div className="h-full px-2 md:px-6 overflow-y-auto scrollbar-hide">
-      {/* header-manu */}
-      <div className="mb-2">
+      <div className="mb-5 mt-4">
         <Header
           lang={params.lang}
           userId={user!.firstName}
@@ -70,10 +69,12 @@ export default async function Page({ params }: langProps) {
           headerTranscript={rootTranscript.common}
         />
       </div>
+
       <Suspense fallback={<GreetingsSkeleton />}>
         {/* @ts-expect-error Server Component */}
-        <Greetings lang={params.lang} user={user!} />
+        <Greetings lang={params.lang} />
       </Suspense>
+
       <div className="">
         <Carousel className="py-4 px-10 mt-8 flex flex-col items-center justify-center overflow-hidden">
           {projects.map((project) => (
@@ -91,12 +92,9 @@ export default async function Page({ params }: langProps) {
         </Carousel>
         <NewProject script={projectScript.newProject} />
       </div>
-      <div className="mt-6 flex-2 grow w-full flex">
-        <div className="w-full">
-          {/* @ts-expect-error Server Component */}
-          <TasksCard />
-        </div>
-      </div>
+
+      {/* @ts-expect-error Server Component */}
+      <TasksCard lang={params.lang} />
     </div>
   );
 }

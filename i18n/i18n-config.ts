@@ -60,20 +60,10 @@ export const i18n = {
   navHeader: ['About', 'Services', 'Pricing', 'Contact'],
 } as const;
 
-export const languages = [
-  'en',
-  'de',
-  'cn',
-  'jp',
-  'es',
-  'pt',
-  'fr',
-  'kr',
-  'it',
-] as const;
 export type ValidLocale = typeof i18n.locales[number];
 export type ValidLocaleIcon = typeof i18n.localeIcon;
 export type Locale = typeof i18n['locales'][number];
+
 export const textList = [
   '你好世界',
   'Hello World',

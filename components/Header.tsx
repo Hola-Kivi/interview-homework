@@ -8,6 +8,7 @@ import { logout } from '@/lib/api';
 import { headerProps } from '@/lib/Types';
 import Button from '@/components/Button';
 import { GlobalIcon } from '@/public/svg/svgRoot';
+import classNames from 'classnames';
 
 export default function Header({
   lang,
@@ -45,7 +46,6 @@ export default function Header({
 
   return (
     <header className="top-0 flex justify-center py-2">
-      {/* header-user-info */}
       <div className="flex-1 text-center">
         <Button
           onClick={() => router.push(userIconPath)}
@@ -60,8 +60,8 @@ export default function Header({
           </div>
         </Button>
       </div>
+
       <div className="ml-auto">
-        {/* header-locale */}
         <Button
           onClick={() => setIsOpen((prev) => !prev)}
           className="hover:fill-gray-600 active:fill-gray-600"
@@ -69,12 +69,16 @@ export default function Header({
         >
           <GlobalIcon />
         </Button>
+
         {isOpen && (
-          <div className="glass absolute z-10 top-18 right-8 w-40 shadow leading-3 rounded-lg">
+          <div className="glass absolute z-20 top-16 right-14 w-40 shadow leading-3 rounded-lg">
             <div className="p-3">
               {langsIcon.map((item) => (
                 <div
-                  className="flex items-center justify-between hover:underline mx-2 mb-2"
+                  className={classNames(
+                    'flex items-center justify-between mx-2 mb-2',
+                    item.underline
+                  )}
                   key={item.lng}
                 >
                   <Link
@@ -89,7 +93,7 @@ export default function Header({
             </div>
           </div>
         )}
-        {/* header-search */}
+
         <Button className="hover:text-gray-600" intent="text">
           <svg
             aria-hidden="true"
@@ -104,7 +108,7 @@ export default function Header({
             />
           </svg>
         </Button>
-        {/* header-logout */}
+
         <Button
           onClick={() => logoutHandler()}
           className="hover:text-gray-600"

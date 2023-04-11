@@ -1,8 +1,11 @@
+import { cookies } from 'next/headers';
 import { ValidLocale } from '@/i18n/i18n-config';
 import { getTranslation } from '@/i18n/getDictionary';
 
-import Card from '@/components/Card';
+import { delay } from '@/lib/async';
 import { langProps } from '@/lib/Types';
+import { getUserFromCookie } from '@/lib/auth';
+import Card from '@/components/Card';
 
 const getScript = async (lang: ValidLocale) => {
   const translate = await getTranslation(lang);
@@ -14,12 +17,20 @@ const getScript = async (lang: ValidLocale) => {
   };
   return greetings;
 };
+const getData = async () => {
+  await delay(3500);
 
-const Greetings = async ({ lang, user }: langProps) => {
+  let user = await getUserFromCookie(cookies());
+
+  return user;
+};
+
+const Greetings = async ({ lang }: langProps) => {
   const greetings = await getScript(lang || 'en');
+  const user = await getData();
 
   return (
-    <Card className="w-full py-4 flex items-center">
+    <Card className="w-full py-4 flex items-center relative">
       <div className="text-start">
         <h1 className="text-xl md:text-2xl text-gray-700 font-bold mb-2">
           {greetings.hello} {user?.firstName}!

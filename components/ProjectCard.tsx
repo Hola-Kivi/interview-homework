@@ -2,8 +2,6 @@ import { FC } from 'react';
 import clsx from 'clsx';
 import { Prisma } from '@prisma/client';
 
-import Card from '@/components/Card';
-
 const projectWithTasks = Prisma.validator<Prisma.ProjectArgs>()({
   include: { tasks: true },
 });

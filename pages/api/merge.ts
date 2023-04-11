@@ -32,7 +32,6 @@ export default async function verifyUploadApi(
     const tempDir = path.resolve(UPLOAD_DIR, hash);
     const cD = path.resolve(UPLOAD_DIR, `${hash}.${ext}`);
 
-    const url = 'http://' + req.headers.host;
     const videoURL = cD;
 
     fse.readdir(tempDir, (err, chunkPaths) => {

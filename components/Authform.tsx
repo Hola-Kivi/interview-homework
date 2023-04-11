@@ -81,6 +81,7 @@ export default function AuthForm({ mode, dictionary, lang }: authFormProps) {
             {dictionary.subheader}
           </p>
         </div>
+
         <form
           onSubmit={handleSubmit}
           className="flex-1 rounded-2xl flex flex-col gap-y-2 pt-10 items-center"
