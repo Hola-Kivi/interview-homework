@@ -64,7 +64,8 @@ export default function LocaleHeader({
                   key={item.lng}
                 >
                   <Link
-                    className={classNames('text-sm', item.underline)}
+                    className="text-sm"
+                    style={{ textDecorationLine: `${item.underline}` }}
                     href={redirectedPathName(item.locale)}
                   >
                     {item.lng}
