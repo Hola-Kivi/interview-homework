@@ -75,14 +75,11 @@ export default function Header({
             <div className="p-3">
               {langsIcon.map((item) => (
                 <div
-                  className={classNames(
-                    'flex items-center justify-between mx-2 mb-2',
-                    item.underline
-                  )}
+                  className="flex items-center justify-between mx-2 mb-2"
                   key={item.lng}
                 >
                   <Link
-                    className="text-sm"
+                    className={classNames('text-sm', item.underline)}
                     href={redirectedPathName(item.locale)}
                   >
                     {item.lng}
