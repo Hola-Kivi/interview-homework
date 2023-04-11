@@ -61,7 +61,7 @@ export default function LocaleHeader({
               {langsIcon.map((item) => (
                 <div
                   className={classNames(
-                    'flex items-center justify-between hover:underline-offset-1 mx-2 mb-2',
+                    'flex items-center justify-between hover:underline-offset-1 mx-2 mb-2 ',
                     item.underline
                   )}
                   key={item.lng}

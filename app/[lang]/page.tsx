@@ -129,7 +129,7 @@ export default async function Page({ params }: langProps) {
                 </div>
               </div>
               <div className="flex-1 flex flex-col gap-y-2 lg:gap-y-10">
-                <VideoList lang={params.lang} />
+                <VideoList />
               </div>
             </div>
           </Card>

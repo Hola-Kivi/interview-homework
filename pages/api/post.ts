@@ -19,7 +19,7 @@ const apiRoute = nextConnect<ReqFile, NextApiResponse>({
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     const { userId, hash } = req.body;
-    const UPLOAD_DIR = path.resolve(__dirname, `../uploads/${userId}`);
+    const UPLOAD_DIR = path.resolve(__dirname, `../public/uploads/${userId}`);
 
     const dest = path.resolve(UPLOAD_DIR, hash);
     fse.mkdirSync(dest, { recursive: true });

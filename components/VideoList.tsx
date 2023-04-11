@@ -1,12 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { Video } from '@prisma/client';
 import data1 from '@/prisma/staticData.json' assert { type: 'json' };
-
-type PropList = {
-  lang: string;
-  data?: Video[];
-};
 
 function VideoItem() {
   return (

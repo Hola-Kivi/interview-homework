@@ -72,7 +72,7 @@ export default function VideoLink({ video }: Props) {
                 className="ring-1 ring-gray-200 p-2 flex flex-col justify-center"
                 key={item.id}
               >
-                <Link href={`/post/chapter/${item.id}`}>
+                <Link href="#">
                   <Image
                     src={item.cover ?? ''}
                     width={700}
