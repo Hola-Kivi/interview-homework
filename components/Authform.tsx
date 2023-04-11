@@ -71,7 +71,7 @@ export default function AuthForm({ mode, dictionary, lang }: authFormProps) {
   );
 
   return (
-    <Card className="glass flex min-h-screen items-center justify-center p-4 sm:px-6 sm:min-h-full lg:px-8">
+    <Card className="glass flex items-center justify-center p-4 sm:px-6 sm:min-h-full lg:px-8 mt-8">
       <div className="max-w-lg space-y-8 mx-4">
         <div className="headings space-y-6">
           <h2 className="text-2xl md:text-4xl headings-title">
