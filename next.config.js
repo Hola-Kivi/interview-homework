@@ -6,7 +6,7 @@
 const nextConfig = {
   experimental: {
     appDir: true,
-    serverComponentsExternalPackages: ['bcrypt', 'spark-md5'],
+    serverComponentsExternalPackages: ['bcrypt', 'spark-md5, multer'],
   },
   images: {
     domains: [
