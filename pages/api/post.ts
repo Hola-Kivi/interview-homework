@@ -20,7 +20,7 @@ const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     const { userId, hash } = req.body;
 
-    const UPLOAD_DIR = path.resolve(process.cwd(), `uploads/${userId}`);
+    const UPLOAD_DIR = path.resolve(process.cwd(), `uploads/userId`);
 
     const dest = path.resolve(UPLOAD_DIR, hash);
     fse.promises.mkdir(dest, { recursive: true });

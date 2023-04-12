@@ -4,8 +4,6 @@
  * @type {import('next').NextConfig}
  **/
 const nextConfig = {
-  reactStrictMode: true,
-  output: 'standalone',
   experimental: {
     appDir: true,
     serverComponentsExternalPackages: ['bcrypt', 'spark-md5', 'multer'],

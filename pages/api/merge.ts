@@ -26,7 +26,7 @@ export default async function verifyUploadApi(
 
   if (req.method === 'POST') {
     const { filename, hash, userId, CHUNK_SIZE } = JSON.parse(req.body);
-    const UPLOAD_DIR = path.resolve(process.cwd(), `uploads/${userId}`);
+    const UPLOAD_DIR = path.resolve(process.cwd(), `uploads/userId`);
 
     const { ext } = splitExtMerge(filename);
     const tempDir = path.resolve(UPLOAD_DIR, hash);
