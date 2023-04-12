@@ -7,13 +7,13 @@ import limit from '@/lib/limit';
 import { uploadVideo } from '@/lib/api';
 import { request } from '@/lib/requestXML';
 import Button from '@/components/Button';
+import clsx from 'clsx';
+import Card from './Card';
 
 type userId = {
   userId: string;
 };
-
 type resultReq = { shouldUpload: boolean; uploadList: []; url?: string };
-
 type FileBlob = {
   file: Blob;
 }[];
@@ -30,6 +30,7 @@ const NewPost = ({ userId }: userId) => {
 
   const [videoAsset, setVideoAsset] = useState('');
   const [files, setFiles] = useState<File[]>();
+  const [progress, setProgress] = useState<number>(0);
 
   const targetRequest = useRef<FileIndex>();
 
@@ -105,6 +106,12 @@ const NewPost = ({ userId }: userId) => {
     });
   };
 
+  const onUploadProgress = (e: ProgressEvent) => {
+    let percentage = parseInt(String((e.loaded / e.total) * 100));
+
+    setProgress(percentage);
+  };
+
   const uploadFiles = async () => {
     if (!files) return;
     const fileChunkList = createChunk(files);
@@ -151,7 +158,7 @@ const NewPost = ({ userId }: userId) => {
     });
     if (!requestList) return;
 
-    const workers = await limit(requestList, MAX_POOL);
+    const workers = await limit({ requestList, MAX_POOL, onUploadProgress });
 
     Promise.allSettled(workers).then((res) => {
       if (
@@ -210,11 +217,39 @@ const NewPost = ({ userId }: userId) => {
           className="opacity-0"
         />
       </label>
+
       <div className="mt-6 text-center">
         <Button intent="secondary" onClick={uploadFiles}>
           Upload
         </Button>
       </div>
+
+      <Card className="py-4 mt-8 border-x-white">
+        {files?.map((file) => (
+          <div key={file.name}>
+            <div className="mb-2">
+              <span className="text-base md:text-xl text-gray-600">
+                {file.name}
+              </span>
+            </div>
+            <div>
+              <div className="w-full h-2 bg-violet-200 rounded-full mb-2">
+                <div
+                  className={clsx(
+                    'h-full text-center text-xs md:text-sm text-white bg-violet-600 rounded-full'
+                  )}
+                  style={{ width: `${progress}%` }}
+                ></div>
+              </div>
+              <div className="text-right">
+                <span className="text-sm md:text-base text-gray-600 font-semibold">
+                  {`${progress}%`}
+                </span>
+              </div>
+            </div>
+          </div>
+        ))}
+      </Card>
     </div>
   );
 };

@@ -8,6 +8,7 @@ type reqParams = {
   data: string | FormData;
   headers?: Header;
   onAbort?(e: XMLHttpRequest): void;
+  onUploadProgress?(e: ProgressEvent): void;
   requestList?: XMLHttpRequest[];
 };
 
@@ -17,6 +18,7 @@ export const request = async ({
   url,
   headers,
   onAbort = (xhr) => xhr,
+  onUploadProgress,
 }: reqParams) => {
   return new Promise<resultReq>((resolve, reject) => {
     const xhr = new XMLHttpRequest();
@@ -27,9 +29,13 @@ export const request = async ({
     xhr.upload.addEventListener('progress', (event) => {
       console.log('--- progress,', event);
     });
-    xhr.upload.addEventListener('load', (event) => {
-      console.log('--- load,', event);
-    });
+
+    if (onUploadProgress) {
+      xhr.upload.addEventListener('load', (e: ProgressEvent) =>
+        onUploadProgress(e)
+      );
+    }
+
     xhr.upload.addEventListener('error', (event) => {
       console.log('--- error,', event);
     });
