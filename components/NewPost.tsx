@@ -29,8 +29,11 @@ const NewPost = ({ userId }: userId) => {
   const router = useRouter();
 
   const [videoAsset, setVideoAsset] = useState('');
+
   const [files, setFiles] = useState<File[]>();
   const [progress, setProgress] = useState<number>(0);
+  const fileSize = useRef(Number.MAX_SAFE_INTEGER);
+  const loadedArr = useRef<number[]>([]);
 
   const targetRequest = useRef<FileIndex>();
 
@@ -40,13 +43,19 @@ const NewPost = ({ userId }: userId) => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFiles([]);
+    setProgress(0);
     targetRequest.current = {};
+    fileSize.current = 0;
+    loadedArr.current.length = 0;
+
     if (!e.target.files || e.target.files.length <= 0) return;
 
     const arrFiles = Array.from(e.target.files);
     setFiles(arrFiles);
   };
   const handleChunk = (file: File) => {
+    fileSize.current = file.size;
+
     let fileChunk = [];
     let cur = 0;
 
@@ -106,8 +115,13 @@ const NewPost = ({ userId }: userId) => {
     });
   };
 
-  const onUploadProgress = (e: ProgressEvent) => {
-    let percentage = parseInt(String((e.loaded / e.total) * 100));
+  const onUploadProgress = (e: ProgressEvent, i: number) => {
+    loadedArr.current[i] = e.loaded * 100;
+    let curTotal = loadedArr.current.reduce((acc, cur) => acc + cur, 0);
+
+    let percentage = parseInt((curTotal / fileSize.current).toFixed(2));
+
+    console.log(percentage);
 
     setProgress(percentage);
   };
@@ -217,39 +231,39 @@ const NewPost = ({ userId }: userId) => {
           className="opacity-0"
         />
       </label>
-
       <div className="mt-6 text-center">
         <Button intent="secondary" onClick={uploadFiles}>
           Upload
         </Button>
       </div>
-
-      <Card className="py-4 mt-8 border-x-white">
-        {files?.map((file) => (
-          <div key={file.name}>
-            <div className="mb-2">
-              <span className="text-base md:text-xl text-gray-600">
-                {file.name}
-              </span>
-            </div>
-            <div>
-              <div className="w-full h-2 bg-violet-200 rounded-full mb-2">
-                <div
-                  className={clsx(
-                    'h-full text-center text-xs md:text-sm text-white bg-violet-600 rounded-full'
-                  )}
-                  style={{ width: `${progress}%` }}
-                ></div>
-              </div>
-              <div className="text-right">
-                <span className="text-sm md:text-base text-gray-600 font-semibold">
-                  {`${progress}%`}
+      {progress != 0 && (
+        <Card className="py-4 mt-8 border-x-white">
+          {files?.map((file) => (
+            <div key={file.name}>
+              <div className="mb-2">
+                <span className="text-base md:text-xl text-gray-600">
+                  {file.name}
                 </span>
               </div>
+              <div>
+                <div className="w-full h-2 bg-violet-200 rounded-full mb-2">
+                  <div
+                    className={clsx(
+                      'h-full text-center text-xs md:text-sm text-white bg-violet-600 rounded-full'
+                    )}
+                    style={{ width: `${progress}%` }}
+                  ></div>
+                </div>
+                <div className="text-right">
+                  <span className="text-sm md:text-base text-gray-600 font-semibold">
+                    {`${progress}%`}
+                  </span>
+                </div>
+              </div>
             </div>
-          </div>
-        ))}
-      </Card>
+          ))}
+        </Card>
+      )}
     </div>
   );
 };
